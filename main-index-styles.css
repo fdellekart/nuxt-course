@@ -1,37 +1,4 @@
-<template>
-  <div class="home-page">
-    <section class="intro">
-      <h1>Get the lastest news!</h1>
-    </section>
-    <section class="featured-posts">
-      <nuxt-link :to="'/posts/' + 1" class="post-preview">
-        <article>
-          <div class="post-thumbnail">
-            <img src="~assets/jules.jpg" alt="Jules" style="width: 100%; height: 100%;">
-          </div>
-          <div class="post-content">
-            <h1 class="post-title">Julchen</h1>
-            <p class="post-preview-content">Gaunz a Fesche!</p>
-          </div>
-        </article>
-      </nuxt-link>
-      <nuxt-link :to="'/posts/' + 2"  class="post-preview">
-        <article>
-          <div class="post-thumbnail">
-            <img src="~assets/flo.jpg" alt="Flo" style="height: 100%; width: 100%;">
-          </div>
-          <div class="post-content">
-            <h1 class="post-title">Flotschi</h1>
-            <p class="post-preview-content">Gaunz a Fescha!!!</p>
-          </div>
-        </article>
-      </nuxt-link>
-    </section>
-  </div>
-</template>
-
-<style scoped>
-  .intro {
+.intro {
   height: 300px;
   position: relative;
   padding: 30px;
@@ -105,4 +72,3 @@ a:hover .post-content,
 a:active .post-content {
   background-color: #ccc;
 }
-</style>
