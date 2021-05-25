@@ -1,8 +1,22 @@
 <template>
   <div>
+    <TheHeader/>
+    <TheSidenav/>
     <Nuxt />
   </div>
 </template>
+
+<script>
+import TheHeader from '../components/Navigation/TheHeader.vue'
+import TheSidenav from '../components/Navigation/TheSidenav'
+
+export default {
+  components: {
+    TheHeader,
+    TheSidenav
+  }
+}
+</script>
 
 <style>
 html {
