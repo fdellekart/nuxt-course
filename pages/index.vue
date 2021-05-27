@@ -3,29 +3,16 @@
     <section class="intro">
       <h1>Get the lastest news!</h1>
     </section>
-    <section class="featured-posts">
-      <post-preview-tile
-        id="1"
-        title="Flotschi"
-        previewText="A Fescha Kerl!"
-        thumbnail="../flo.jpg"
-      />
-      <post-preview-tile
-        id="2"
-        title="Julchen"
-        previewText="A Fesches Mädl!"
-        thumbnail="../jules.jpg"
-      />
-    </section>
+    <post-list/>
   </div>
 </template>
 
 <script>
-import PostPreviewTile from '../components/posts/PostPreviewTile.vue'
+import PostList from '@/components/posts/PostList'
 
 export default {
   components: {
-    PostPreviewTile
+    PostList
   }
 }
 </script>
@@ -60,14 +47,5 @@ export default {
   .intro h1 {
     font-size: 2rem;
   }
-}
-
-.featured-posts {
-  display: flex;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 </style>
