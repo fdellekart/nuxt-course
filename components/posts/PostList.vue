@@ -1,17 +1,12 @@
 <template>
     <section class="posts-list">
       <post-preview-tile
-        id="1"
-        title="Ein leiwanda Post"
-        previewText="A guada!"
-        thumbnail="https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-        :is-admin="isAdmin"
-      />
-      <post-preview-tile
-        id="2"
-        title="Nu ana"
-        previewText="Ah a guada!"
-        thumbnail="https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
+        v-for="post in posts"
+        :key="post.id"
+        :id="post.id"
+        :title="post.title"
+        :previewText="post.previewText"
+        :thumbnail="post.thumbnail"
         :is-admin="isAdmin"
       />
     </section>
@@ -27,8 +22,12 @@ export default {
   props: {
     isAdmin: {
       type: Boolean,
-      requried: false,
+      required: false,
       default: false
+    },
+    posts: {
+      type: Array,
+      required: true
     }
   }
 }
