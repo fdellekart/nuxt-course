@@ -36,6 +36,9 @@ export default {
         }).then(data => {
             return data
         })
+  },
+  created () {
+      this.$store.dispatch('setPosts', this.posts)
   }
 }
 </script>
