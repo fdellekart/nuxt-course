@@ -1,7 +1,7 @@
 <template>
     <div class="posts_page">
     <PostList
-        :posts="posts"
+        :posts="loadedPosts"
     />
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
     components: {
         PostList
     },
-    asyncData(context) {
+    fetch(context) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
             resolve({
@@ -32,13 +32,15 @@ export default {
             }
         ]
       }) 
-    }, 1500)
+    }, 1500);
         }).then(data => {
-            return data
+            context.store.commit('setPosts', data.posts)
         })
   },
-  created () {
-      this.$store.dispatch('setPosts', this.posts)
+  computed: {
+      loadedPosts() {
+          return this.$store.getters.loadedPosts
+      }
   }
 }
 </script>
