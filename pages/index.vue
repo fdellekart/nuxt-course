@@ -16,9 +16,10 @@ export default {
   components: {
     PostList
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
+  asyncData(context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+      resolve({
         posts: [
         {
           id: "1",
@@ -34,7 +35,10 @@ export default {
         }
       ]
       }) 
-    }, 1500)
+    }, 1000)
+    }).then(data => {
+      return data
+    })
   }
 }
 </script>

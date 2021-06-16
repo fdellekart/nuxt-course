@@ -16,9 +16,10 @@
 
 <script>
 export default {
-    asyncData(context, callback) {
-        setTimeout(() => {
-            callback(null, {
+    asyncData(context) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+            resolve({
                 post: {
                 id: "1",
                 title: "A Post! (ID: " + context.params.id + ")",
@@ -31,6 +32,9 @@ export default {
             })
         },
         1000)
+        }).then(data => {
+            return data
+        })
     }
 }
 </script>
