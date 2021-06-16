@@ -4,7 +4,7 @@
       <h1>Get the lastest news!</h1>
     </section>
     <PostList
-      :posts="posts"
+      :posts="loadedPosts"
     />
   </div>
 </template>
@@ -16,29 +16,10 @@ export default {
   components: {
     PostList
   },
-  asyncData(context) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-      resolve({
-        posts: [
-        {
-          id: "1",
-          title: "A Post!",
-          previewText: "A guada!",
-          thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-        },
-        {
-          id: "2",
-          title: "A aundara Post!",
-          previewText: "A Bessana!",
-          thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-        }
-      ]
-      }) 
-    }, 1000)
-    }).then(data => {
-      return data
-    })
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
