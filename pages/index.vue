@@ -16,9 +16,10 @@ export default {
   components: {
     PostList
   },
-  data() {
-    return {
-      posts: [
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        posts: [
         {
           id: "1",
           title: "A Post!",
@@ -32,7 +33,8 @@ export default {
           thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
         }
       ]
-    }
+      }) 
+    }, 1500)
   }
 }
 </script>
