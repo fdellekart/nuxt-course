@@ -1,6 +1,6 @@
 <template>
     <div class="admin-new-post-page">
-        <admin-post-form/>
+        <admin-post-form class="new-post-form"/>
     </div>
 </template>
 
