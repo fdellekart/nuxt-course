@@ -16,10 +16,12 @@ export default {
     },
     data() {
         return {
-            author: "Flo",
-            title: "Awesome toast",
-            content: "Some stufftuff",
-            thumbnailLink: "../flo.jpg"
+            loadedPost:{
+                author: "Flo",
+                title: "Awesome toast",
+                content: "Some stufftuff",
+                thumbnailLink: "../flo.jpg"
+            }
         }
     }
 }
