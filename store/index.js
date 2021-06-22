@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import axios from 'axios'
 
 const createStore = () => {
     return new Vuex.Store(
@@ -13,24 +14,15 @@ const createStore = () => {
             },
             actions: {
                 nuxtServerInit(vuexContext, context) {
-                    return new Promise((resolve, reject) => { 
-                        vuexContext.commit('setPosts', 
-                        [
-                            {
-                            id: "1",
-                            title: "A Post!",
-                            previewText: "A guada!",
-                            thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-                            },
-                            {
-                            id: "2",
-                            title: "A aundara Post!",
-                            previewText: "A Bessana!",
-                            thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-                        }
-                        ])
-                        resolve() 
-                })
+                    return axios.get('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+                        .then(response => {
+                            let postsArray = []
+                            for (let key in response.data) {
+                                postsArray.push({...response.data[key], id:key})
+                            }
+                            vuexContext.commit('setPosts', postsArray)
+                        })
+                        .catch(e => console.log(e))
                 },
                 setPosts(vuexContext, posts) {
                     vuexContext.commit('setPosts', posts)
