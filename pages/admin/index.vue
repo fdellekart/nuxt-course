@@ -2,6 +2,7 @@
     <div class="admin-page">
         <section class="new-post">
             <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton>
+            <AppButton @click="$router.push('/')">Back to Home</AppButton>
         </section>
         <section class="existing-posts">
             <h1>Existing posts</h1>
