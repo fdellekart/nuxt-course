@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
@@ -14,16 +15,16 @@ export default {
     components: {
         AdminPostForm
     },
-    data() {
-        return {
-            loadedPost:{
-                author: "Flo",
-                title: "Awesome toast",
-                content: "Some stufftuff",
-                thumbnailLink: "../flo.jpg"
-            }
-        }
+    asyncData(context) {
+        return axios.get('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + context.params.postId + '.json')
+            .then(res => {
+                return {
+                    loadedPost: res.data
+                }
+            })
+            .catch(e => context.error(e))
     }
+
 }
 </script>
 
