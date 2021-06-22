@@ -18,6 +18,7 @@ export default {
         axios.post('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
         .then(result => console.log(result))
         .catch(e => console.log(e))
+        this.$router.push('/admin')
       }
     }
 }

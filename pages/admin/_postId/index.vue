@@ -1,7 +1,7 @@
 <template>
     <div class="admin-post-page">
         <section class="update-form">
-            <AdminPostForm :post="loadedPost"/>
+            <AdminPostForm :post="loadedPost" @submit="onSubmitted($event)"/>
         </section>
     </div>
 </template>
@@ -23,6 +23,12 @@ export default {
                 }
             })
             .catch(e => context.error(e))
+    },
+    methods: {
+        onSubmitted(postData) {
+            console.log(postData)
+            this.$router.push('/admin')
+        }
     }
 
 }
