@@ -1,12 +1,12 @@
 <template>
     <div class="single-post-page container">
         <section class="post">
-            <h1 class="post-title">{{ post.title }}</h1>
+            <h1 class="post-title">{{ loadedPost.title }}</h1>
             <div class="post-details">
-                <div class="post-detail">Last Updated on: {{ post.lastUpdatedDate }}</div>
-                <div class="post-detail">Written By: {{ post.author }}</div>
+                <div class="post-detail">Last Updated on: {{ loadedPost.lastUpdatedDate }}</div>
+                <div class="post-detail">Written By: {{ loadedPost.author }}</div>
             </div>
-            <p>{{ post.content }}</p>
+            <p>{{ loadedPost.content }}</p>
         </section>
         <section class="post-feedback">
             <p>Let me know what you think about my post per <a href="mailto:flo@blog.com">Mail</a></p>
@@ -15,26 +15,17 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     asyncData(context) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-            resolve({
-                post: {
-                id: "1",
-                title: "A Post! (ID: " + context.params.id + ")",
-                previewText: "A guada!",
-                author: "Flo",
-                lastUpdatedDate: new Date(),
-                content: "Some content for the post",
-                thumbnail: "https://www.ikea.com/mx/en/images/products/pjaetteryd-picture-trolltunga-norway__0925582_pe788810_s5.jpg"
-            }
+        return axios.get('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + context.params.id + '.json')
+            .then(res => {
+                return {
+                    loadedPost: res.data
+                }
             })
-        },
-        1000)
-        }).then(data => {
-            return data
-        })
+            .catch(e => context.error(e))
     }
 }
 </script>
