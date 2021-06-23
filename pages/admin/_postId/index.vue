@@ -26,7 +26,9 @@ export default {
     },
     methods: {
         onSubmitted(postData) {
-            console.log(postData)
+            axios.put('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + this.$route.params.postId + '.json', postData)
+            .then(res => console.log(res))
+            .catch(e => console.log(e))
             this.$router.push('/admin')
         }
     }
