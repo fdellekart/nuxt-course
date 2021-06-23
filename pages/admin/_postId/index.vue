@@ -19,17 +19,15 @@ export default {
         return axios.get('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + context.params.postId + '.json')
             .then(res => {
                 return {
-                    loadedPost: res.data
+                    loadedPost: { ...res.data, id: context.params.postId }
                 }
             })
             .catch(e => context.error(e))
     },
     methods: {
         onSubmitted(postData) {
-            axios.put('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + this.$route.params.postId + '.json', postData)
-            .then(res => console.log(res))
-            .catch(e => console.log(e))
-            this.$router.push('/admin')
+            this.$store.dispatch('editPost', postData)
+            .then(this.$router.push('/admin'))
         }
     }
 

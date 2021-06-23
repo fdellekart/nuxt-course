@@ -10,7 +10,14 @@ const createStore = () => {
             mutations: {
                 setPosts(state, posts) {
                     state.loadedPosts = posts
-                } 
+                },
+                addPost(state, post) {
+                    state.loadedPosts.push(post)
+                },
+                editPost(state, editedPost) {
+                    const postIndex = state.loadedPosts.findIndex(post => post.id == editedPost.id)
+                    this._vm.$set(state.loadedPosts, postIndex, editedPost)
+                }
             },
             actions: {
                 nuxtServerInit(vuexContext, context) {
@@ -26,7 +33,22 @@ const createStore = () => {
                 },
                 setPosts(vuexContext, posts) {
                     vuexContext.commit('setPosts', posts)
+                },
+                addPost(vuexContext, post) {
+                    const newPost = { ...post, lastUpdatedDate: new Date()}
+                    return axios.post('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json', newPost)
+                    .then(res => {
+                        vuexContext.commit('addPost', { ...newPost, id: res.data.name})
+                    })
+                    .catch(e => console.log(e))
+                },
+                editPost(vuexContext, editedPost) {
+                    editedPost.lastUpdatedDate = new Date()
+                    return axios.put('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + editedPost.id + '.json', editedPost)
+                    .then(() => vuexContext.commit('editPost', editedPost))
+                    .catch(e => console.log(e))
                 }
+
             },
             getters: {
                 loadedPosts(state) {

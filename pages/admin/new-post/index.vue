@@ -15,10 +15,9 @@ export default {
     },
     methods: {
       onSubmitted(postData) {
-        axios.post('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json', { ...postData, lastUpdatedDate: new Date()})
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
-        this.$router.push('/admin')
+        console.log(postData)
+        this.$store.dispatch('addPost', postData)
+        .then(this.$router.push('/admin'))
       }
     }
 }
