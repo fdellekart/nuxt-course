@@ -21,7 +21,7 @@ const createStore = () => {
             },
             actions: {
                 nuxtServerInit(vuexContext, context) {
-                    return axios.get('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+                    return axios.get(process.env.baseUrl + 'posts.json')
                         .then(response => {
                             let postsArray = []
                             for (let key in response.data) {
@@ -36,7 +36,7 @@ const createStore = () => {
                 },
                 addPost(vuexContext, post) {
                     const newPost = { ...post, lastUpdatedDate: new Date()}
-                    return axios.post('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts.json', newPost)
+                    return axios.post(process.env.baseUrl + 'posts.json', newPost)
                     .then(res => {
                         vuexContext.commit('addPost', { ...newPost, id: res.data.name})
                     })
@@ -44,7 +44,7 @@ const createStore = () => {
                 },
                 editPost(vuexContext, editedPost) {
                     editedPost.lastUpdatedDate = new Date()
-                    return axios.put('https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/posts/' + editedPost.id + '.json', editedPost)
+                    return axios.put(process.env.baseUrl + 'posts/' + editedPost.id + '.json', editedPost)
                     .then(() => vuexContext.commit('editPost', editedPost))
                     .catch(e => console.log(e))
                 }

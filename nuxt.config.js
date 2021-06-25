@@ -1,7 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'flos_blog',
+    mode: 'universal',
+    title: 'Flos Blog',
     htmlAttrs: {
       lang: 'en'
     },
@@ -43,5 +44,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  loading: {color: "#fa932f", height: "20px"},
+  env: {
+    baseUrl: 'https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/'
   }
 }
