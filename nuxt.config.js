@@ -24,6 +24,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~plugins/core-components.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +46,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  loading: {color: "#fa932f", height: "20px"},
+  loading: {color: "#fa932f", height: "5px"},
   env: {
     baseUrl: 'https://flo-blog-default-rtdb.europe-west1.firebasedatabase.app/'
   }
