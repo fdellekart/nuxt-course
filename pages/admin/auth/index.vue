@@ -2,6 +2,7 @@
   <div class="admin-auth-page">
     <div class="auth-container">
       <form @submit.prevent="onSubmit">
+        <p class="unauthenticated-warn" style="color: red" v-if="showWarning & isLogin">Login not Possible</p>
         <AppControlInput type="email" v-model="email">E-Mail Address</AppControlInput>
         <AppControlInput type="password" v-model="password">Password</AppControlInput>
         <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
@@ -23,7 +24,8 @@ export default {
     return {
       isLogin: true,
       email: '',
-      password: ''
+      password: '',
+      showWarning: false
     }
   },
   methods: {
@@ -33,9 +35,10 @@ export default {
         isLogin: this.isLogin,
         email: this.email,
         password: this.password
-      }).then(
-        () => console.log("AuthToken:", this.$store.getters.authToken)
-      )
+      }).then(() => this.$router.push('/admin')
+      ).catch(() => {
+        this.showWarning = true
+      })
     }
   }
 }
