@@ -1,10 +1,26 @@
 <template>
-  <div>
-    <Nuxt />
+  <div class="container">
+    <header class="admin-header">
+      <AppButton class="logout-button" @click="logout">Log Out</AppButton>
+    </header>
+    <div>
+      <Nuxt />
+    </div>
   </div>
 </template>
 
-<style>
+<script>
+export default {
+  methods: {
+    logout () {
+      this.$store.dispatch('clearAuthToken')
+      this.$router.push('/')
+    }
+  }
+}
+</script>
+
+<style scoped>
 html {
   font-family:
     'Source Sans Pro',
@@ -22,6 +38,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.container {
+  padding-top: 65px;
 }
 
 *,
@@ -59,4 +79,18 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+.admin-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-content: right;
+  background-color: black;
+  z-index: 100;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
 </style>

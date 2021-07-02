@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import Vue from 'vue'
 import Cookie from 'js-cookie'
 
 const createStore = () => {
@@ -75,7 +76,16 @@ const createStore = () => {
                     })
                 },
                 setLogOutTimer(vuexContext, duration) {
-                    setTimeout(() => vuexContext.commit('clearAuthToken'), duration)
+                    setTimeout(() => {
+                        vuexContext.dispatch('clearAuthToken')
+                    }, duration)
+                },
+                clearAuthToken(vuexContext) {
+                    localStorage.removeItem('authToken')
+                    localStorage.removeItem('authTokenExpiresIn')
+                    Cookie.remove('jwt')
+                    Cookie.remove('expirationDate')
+                    vuexContext.commit('clearAuthToken')
                 },
                 initAuth(vuexContext, req) {
                     let token
