@@ -36,7 +36,8 @@ export default {
         email: this.email,
         password: this.password
       }).then(() => this.$router.push('/admin')
-      ).catch(() => {
+      ).catch((e) => {
+        console.log(e)
         this.showWarning = true
       })
     }
