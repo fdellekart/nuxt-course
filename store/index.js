@@ -77,11 +77,11 @@ const createStore = () => {
                 initAuth(vuexContext) {
                     const token = localStorage.getItem('authToken')
                     const expirationDate = localStorage.getItem('authTokenExpiresIn')
-                    if (new Date() > expirationDate || !token){
+                    if (new Date().getTime() > +expirationDate || !token){
                         return
                     }
                     vuexContext.commit('setToken', token)
-                    vuexContext.dispatch('setLogOutTimer', expirationDate - new Date().getTime())
+                    vuexContext.dispatch('setLogOutTimer', +expirationDate - new Date().getTime())
                 }
 
             },
