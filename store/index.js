@@ -66,6 +66,7 @@ const createStore = () => {
                         returnSecureToken: true
                     }).then(res => {
                         vuexContext.commit('setAuthToken', res.data.idToken)
+                        localStorage.setItem('authToken', res.data.idToken)
                         vuexContext.dispatch('setLogOutTimer', res.data.expiresIn)
                     })
                 },
