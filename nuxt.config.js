@@ -50,4 +50,7 @@ export default {
   build: {
   },
   loading: {color: "#fa932f", height: "5px"},
+  publicRuntimeConfig: {
+    FB_API_KEY: process.env.FB_API_KEY
+  }
 }

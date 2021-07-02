@@ -28,10 +28,11 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.$config)
       const loginUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
       const signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
       const authUrl = this.isLogin ? loginUrl : signUpUrl
-      this.$axios.post(authUrl + process.env.FB_API_KEY,
+      this.$axios.post(authUrl + this.$config.FB_API_KEY,
       {
         email: this.email,
         password: this.password,
