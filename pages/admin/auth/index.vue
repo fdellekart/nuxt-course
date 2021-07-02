@@ -28,18 +28,14 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.$config)
-      const loginUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
-      const signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
-      const authUrl = this.isLogin ? loginUrl : signUpUrl
-      this.$axios.post(authUrl + this.$config.FB_API_KEY,
+      this.$store.dispatch('authenticateUser',
       {
+        isLogin: this.isLogin,
         email: this.email,
-        password: this.password,
-        returnSecureToken: true
-      }).then(res => {
-        console.log(this.isLogin ? 'Login' : 'Signup', 'Response:', res)
-      })
+        password: this.password
+      }).then(
+        () => console.log("AuthToken:", this.$store.getters.authToken)
+      )
     }
   }
 }

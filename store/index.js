@@ -4,7 +4,8 @@ const createStore = () => {
     return new Vuex.Store(
         {
             state: {
-                loadedPosts: []
+                loadedPosts: [],
+                authToken: ''
             },
             mutations: {
                 setPosts(state, posts) {
@@ -16,6 +17,9 @@ const createStore = () => {
                 editPost(state, editedPost) {
                     const postIndex = state.loadedPosts.findIndex(post => post.id == editedPost.id)
                     this._vm.$set(state.loadedPosts, postIndex, editedPost)
+                },
+                setAuthToken(state, token) {
+                   state.authToken = token
                 }
             },
             actions: {
@@ -46,12 +50,29 @@ const createStore = () => {
                     return this.$axios.put('posts/' + editedPost.id + '.json', editedPost)
                     .then(() => vuexContext.commit('editPost', editedPost))
                     .catch(e => console.log(e))
+                },
+                authenticateUser(vuexContext, userData) {
+                    console.log('User Data:', userData)
+                    const loginUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
+                    const signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
+                    const authUrl = userData.isLogin ? loginUrl : signUpUrl
+                    return this.$axios.post(authUrl + this.$config.FB_API_KEY,
+                    {
+                        email: userData.email,
+                        password: userData.password,
+                        returnSecureToken: true
+                    }).then(res => {
+                        vuexContext.commit('setAuthToken', res.data.idToken)
+                    })
                 }
 
             },
             getters: {
                 loadedPosts(state) {
                     return state.loadedPosts
+                },
+                authToken(state) {
+                    return state.authToken
                 }
             }
             }
