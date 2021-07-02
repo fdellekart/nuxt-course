@@ -5,7 +5,7 @@ const createStore = () => {
         {
             state: {
                 loadedPosts: [],
-                authToken: ''
+                authToken: null
             },
             mutations: {
                 setPosts(state, posts) {
@@ -73,6 +73,9 @@ const createStore = () => {
                 },
                 authToken(state) {
                     return state.authToken
+                },
+                isAuthenticated(state) {
+                    return state.authToken != null
                 }
             }
             }

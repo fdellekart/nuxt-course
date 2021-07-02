@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  middleware: 'log'
-}
-</script>
-
 <style>
 html {
   font-family:
